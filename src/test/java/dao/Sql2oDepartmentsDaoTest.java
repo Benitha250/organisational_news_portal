@@ -55,22 +55,22 @@ public class Sql2oDepartmentsDaoTest {
     public void idSetForAddedDepartment() {
         Departments department=setUpNewDepartment();
         int originalId=department.getId();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.addDepartment(department);
         assertNotEquals(originalId,department.getId());
     }
 
 
 
     @Test
-    public void addUserToDepartment() {
+    public void addUserInDepartment() {
         Departments department=setUpNewDepartment();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.addDepartment(department);
         Users user=setUpNewUser();
         Users otherUser= new Users("Wangui","intern","Paper work");
         sql2oUsersDao.add(user);
         sql2oUsersDao.add(otherUser);
-        sql2oDepartmentsDao.addUserToDepartment(user,department);
-        sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
+        sql2oDepartmentsDao.addUserInDepartment(user,department);
+        sql2oDepartmentsDao.addUserInDepartment(otherUser,department);
         assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
         assertEquals(2,sql2oDepartmentsDao.findById(department.getId()).getSize());
     }
@@ -79,8 +79,8 @@ public class Sql2oDepartmentsDaoTest {
     public void getAll() {
         Departments department=setUpNewDepartment();
         Departments otherDepartment=new Departments("printing","printing of books");
-        sql2oDepartmentsDao.add(department);
-        sql2oDepartmentsDao.add(otherDepartment);
+        sql2oDepartmentsDao.addDepartment(department);
+        sql2oDepartmentsDao.addDepartment(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.getAll().get(0));
         assertEquals(otherDepartment,sql2oDepartmentsDao.getAll().get(1));
     }
@@ -89,8 +89,8 @@ public class Sql2oDepartmentsDaoTest {
     public void correctDepartmentIsReturnedFindById() {
         Departments department=setUpNewDepartment();
         Departments otherDepartment=new Departments("printing","printing of books");
-        sql2oDepartmentsDao.add(department);
-        sql2oDepartmentsDao.add(otherDepartment);
+        sql2oDepartmentsDao.addDepartment(department);
+        sql2oDepartmentsDao.addDepartment(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.findById(department.getId()));
         assertEquals(otherDepartment,sql2oDepartmentsDao.findById(otherDepartment.getId()));
 
@@ -99,13 +99,13 @@ public class Sql2oDepartmentsDaoTest {
     @Test
     public void getAllUsersInDepartment() {
         Departments department=setUpNewDepartment();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.addDepartment(department);
         Users user=setUpNewUser();
         Users otherUser= new Users("Wangui","intern","Paper work");
         sql2oUsersDao.add(user);
         sql2oUsersDao.add(otherUser);
-        sql2oDepartmentsDao.addUserToDepartment(user,department);
-        sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
+        sql2oDepartmentsDao.addUserInDepartment(user,department);
+        sql2oDepartmentsDao.addUserInDepartment(otherUser,department);
         assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
         assertEquals(2,sql2oDepartmentsDao.findById(department.getId()).getSize());
     }
@@ -114,7 +114,7 @@ public class Sql2oDepartmentsDaoTest {
         Users users=setUpNewUser();
         sql2oUsersDao.add(users);
         Departments departments=setUpNewDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.addDepartment(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);
@@ -126,9 +126,9 @@ public class Sql2oDepartmentsDaoTest {
 
     //helper
     private Departments setUpNewDepartment() {
-        return new Departments("Editing","editing of newspaper");
+        return new Departments("Finance","deal with money");
     }
     private Users setUpNewUser() {
-        return new Users("Ruth Mwangi","manager","Editor");
+        return new Users("Benitha","ceo","manager");
     }
 }

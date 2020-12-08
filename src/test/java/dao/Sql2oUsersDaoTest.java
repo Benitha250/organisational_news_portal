@@ -76,15 +76,15 @@ public class Sql2oUsersDaoTest {
     public void getDepartmentsUserIsIn() {
         Departments department=setUpNewDepartment();
         Departments otherDepartment=new Departments("printing","printing of books");
-        sql2oDepartmentsDao.add(department);
-        sql2oDepartmentsDao.add(otherDepartment);
+        sql2oDepartmentsDao.addDepartment(department);
+        sql2oDepartmentsDao.addDepartment(otherDepartment);
         Users user=setUpNewUser();
         Users otherUser= new Users("Wangui","intern","Paper work");
         sql2oUsersDao.add(user);
         sql2oUsersDao.add(otherUser);
-        sql2oDepartmentsDao.addUserToDepartment(user,department);
-        sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
-        sql2oDepartmentsDao.addUserToDepartment(user,otherDepartment);
+        sql2oDepartmentsDao.addUserInDepartment(user,department);
+        sql2oDepartmentsDao.addUserInDepartment(otherUser,department);
+        sql2oDepartmentsDao.addUserInDepartment(user,otherDepartment);
         assertEquals(2,sql2oUsersDao.getAllUserDepartments(user.getId()).size());
         assertEquals(1,sql2oUsersDao.getAllUserDepartments(otherUser.getId()).size());
     }

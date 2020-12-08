@@ -90,7 +90,7 @@ public class App {
             String name=request.queryParams("name");
             String description=request.queryParams("description");
             Departments department=new Departments(name,description);
-            sql2oDepartmentsDao.add( department);
+            sql2oDepartmentsDao.addDepartment( department);
             request.session().attribute("item", name);
             model.put("item", request.session().attribute("item"));
             return new ModelAndView(model,"departmentForm.hbs");
@@ -197,7 +197,7 @@ public class App {
         });
         post("/departments/new","application/json",(request, response) -> {
             Departments departments =gson.fromJson(request.body(),Departments.class);
-            sql2oDepartmentsDao.add(departments);
+            sql2oDepartmentsDao.addDepartment(departments);
             response.status(201);
             return gson.toJson(departments);
         });
@@ -247,7 +247,7 @@ public class App {
                 throw new ApiException(404, String.format("No user with the id: \"%s\" exists",
                         request.params("user_id")));
             }
-            sql2oDepartmentsDao.addUserToDepartment(users,departments);
+            sql2oDepartmentsDao.addUserInDepartment(users,departments);
 
             List<Users> departmentUsers=sql2oDepartmentsDao.getAllUsersInDepartment(departments.getId());
 

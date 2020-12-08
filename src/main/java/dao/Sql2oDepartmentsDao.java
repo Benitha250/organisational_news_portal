@@ -19,7 +19,7 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
     }
 
     @Override
-    public void add(Departments department) {
+    public void addDepartment(Departments department) {
         try(Connection con=sql2o.open()) {
             String sql="INSERT INTO departments (name,description,size) VALUES (:name,:description,:size)";
             int id=(int) con.createQuery(sql,true)
@@ -35,7 +35,7 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
     }
 
     @Override
-    public void addUserToDepartment(Users user, Departments department) {
+    public void addUserInDepartment(Users user, Departments department) {
 
         try(Connection con=sql2o.open()) {
             String sql="INSERT INTO users_departments (user_id,department_id) VALUES (:user_id,:department_id)";

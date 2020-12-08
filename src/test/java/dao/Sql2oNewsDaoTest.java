@@ -22,7 +22,7 @@ public class Sql2oNewsDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        //uncomment the two lines below to run locally and change to your  credentials
+        //uncomment the two lines below to run locally
         String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal_test";
         Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
 
@@ -55,7 +55,7 @@ public class Sql2oNewsDaoTest {
         Users users=setUpNewUsers();
         sql2oUsersDao.add(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.addDepartment(departments);
         News news=new News("Meeting","Meeting to set activities for team building",users.getId());
         sql2oNewsDao.addNews(news);
 
@@ -71,7 +71,7 @@ public class Sql2oNewsDaoTest {
         Users users=setUpNewUsers();
         sql2oUsersDao.add(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.addDepartment(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);
@@ -88,7 +88,7 @@ public class Sql2oNewsDaoTest {
         Users users=setUpNewUsers();
         sql2oUsersDao.add(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.addDepartment(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);
@@ -107,11 +107,13 @@ public class Sql2oNewsDaoTest {
 //    private News setUpNewNews() {
 //        return new News("Meeting","Meeting to set activities for team building");
 //    }
+
     private Departments setUpDepartment() {
-        return new Departments("Editing","editing of books");
+        return new Departments("Finance","deal with money");
     }
     private Users setUpNewUsers() {
-        return new Users("Ruth Mwangi","Manager","Editor");
+        return new Users("Benitha","ceo","manager");
     }
+
 
 }
