@@ -37,12 +37,13 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
         staticFileLocation("/public");
-        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
-        Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
+
+        //String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+        //Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
 
         //the two lines below are used when using heroku but if you want to run locally comment them
-        /*String connectionString = "jdbc:postgresql://ec2-50-17-21-170.compute-1.amazonaws.com:5432/d8b8ehu0safpui"; //!
-        Sql2o sql2o = new Sql2o(connectionString, "mihpivzxyyqmlv", "5b4f9d76874ad368465a325b3993140263c6d254771908c3d283842d54fcad11");*/
+        String connectionString = "jdbc:postgresql://ec2-54-237-135-248.compute-1.amazonaws.com:5432/deal7s6fag62p8"; //!
+        Sql2o sql2o = new Sql2o(connectionString, "hhblxnfrasoyre", "a0891b72664c1f2cdec0d4814ac82ea978156ac9d3a1f41a95ccdc15deb89a56");
 
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
