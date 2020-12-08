@@ -1,0 +1,21 @@
+{{#partial "content"}}
+
+    {{#if departments}}
+        <div class="row list">
+            {{#each departments as |d| }}
+                <div class="col-md-4" style="color:black">
+                    <div>
+                        <p id={{d.id}}>{{d.name}}</p><br>
+                        <p id={{d.id}}>{{d.description}}</p><br>
+                    </div>
+                    <br>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <p class="text">There are no department, register here <a href="/create/department">here</a></p>
+    {{/if}}
+
+{{/partial}}
+
+{{> layout.hbs}}

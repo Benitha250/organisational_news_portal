@@ -1,0 +1,28 @@
+{{#partial "content"}}
+
+    <div class="form">
+        <form action="/create/user/new" method="post">
+            <h1>Create User</h1>
+            <hr>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Input Name..." required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" class="form-control form-control-lg" id="position" name="position" placeholder="Input position...."required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <input type="text" class="form-control form-control-lg" id="staff_role" name="staff_role" placeholder="Input your role ..."
+                       required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg"> Done </button>
+            </div>
+        </form>
+    </div>
+
+{{/partial}}
+
+{{> layout.hbs}}

@@ -9,6 +9,8 @@ import models.News;
 import models.Users;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 
 
 import java.util.HashMap;
@@ -46,6 +48,61 @@ public class App {
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
         conn=sql2o.open();
+
+        get("/",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"index.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //------------------user-------
+        get("/create/user",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"userForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        post("/create/user/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String name=request.queryParams("name");
+            String position=request.queryParams("position");
+            String staff_role=request.queryParams("staff_role");
+            Users user=new Users(name,position,staff_role);
+            sql2oUsersDao.add( user);
+            request.session().attribute("item", name);
+            model.put("item", request.session().attribute("item"));
+            return new ModelAndView(model,"userForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/users",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            model.put("users",sql2oUsersDao.getAll());
+            return new ModelAndView(model,"user.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //------------------department-------
+
+        get("/create/department",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"departmentForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        post("/create/department/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String name=request.queryParams("name");
+            String description=request.queryParams("description");
+            Departments department=new Departments(name,description);
+            sql2oDepartmentsDao.add( department);
+            request.session().attribute("item", name);
+            model.put("item", request.session().attribute("item"));
+            return new ModelAndView(model,"departmentForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/departments",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            model.put("departments",sql2oDepartmentsDao.getAll());
+            return new ModelAndView(model,"department.hbs");
+        },new HandlebarsTemplateEngine());
+
+        // ---------------------------------------APIs-----------------------
 
         //read users,news,departments
         get("/users", "application/json", (request, response) -> {
@@ -208,10 +265,6 @@ public class App {
             response.body(gson.toJson(jsonMap));
         });
 
-
-        after((request, response) ->{
-            response.type("application/json");
-        });
 
 
     }
