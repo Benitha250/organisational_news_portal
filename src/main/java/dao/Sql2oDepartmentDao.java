@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class Sql2oDepartmentDao implements DepartmentDao {
 
+
     private final Sql2o sql2o;
     private final Sql2oUserDao userDao;
     private final Sql2oNewsDao newsDao;

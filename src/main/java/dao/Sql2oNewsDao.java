@@ -12,6 +12,7 @@ import java.util.List;
 public class Sql2oNewsDao implements NewsDao {
 
 
+
     private final Sql2o sql2o;
     public static final String GENERAL_NEWS="general";
     public static final String DEPARTMENT_NEWS="department";
