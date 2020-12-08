@@ -38,12 +38,14 @@ public class App {
                 Integer.parseInt(process.environment().get("PORT")):7654;
         port(port);
 
-        String connectionStr="jdbc:postgresql://localhost:5432/newsportal";
+        String connectionString = "jdbc:postgresql://localhost:5432/organisationalnewsportal";
+        Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
 
-        try {
+
+/*        try {
             if (System.getenv("DATABASE_URL") == null) {
-                dbUri = new URI("postgres://localhost:5432/wildlife_tracker");
-                sql2o = new Sql2o(connectionStr,"pkminor","password");
+                dbUri = new URI("postgres://localhost:5432/organisationalnewsportal");
+                sql2o = new Sql2o(connectionStr,"benitha","123");
 
             } else {
 
@@ -56,11 +58,16 @@ public class App {
                 sql2o = new Sql2o("jdbc:postgresql://" + host + ":" + dbport + path, username, password);
             }
 
-        } catch (URISyntaxException e ) {
-            logger.error("Unable to connect to database.");
+
+
         }
+        catch (URISyntaxException e ) {
+            logger.error("Unable to connect to database.");
+        }*/
+
 
         con = sql2o.open();
+
 
         newsDao = new Sql2oNewsDao(sql2o);
         dptDao = new Sql2oDepartmentDao(sql2o);
